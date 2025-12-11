@@ -115,123 +115,119 @@ Configuration (example):
 
 s1.src = 'https://embed.tawk.to/YOUR_TAWKTO_ID/default';
 
-🏗️ Tech Stack
-Backend — Django
+# 🏗️ TicketFlow
 
-Django 4.2
+## Tech Stack
 
-Django REST Framework
+### Backend — Django
+- Django 4.2
+- Django REST Framework
+- Simple JWT
+- Cloudinary
+- SQLite for development
+- CORS Headers
 
-Simple JWT
+### Frontend — React (Option A)
+- React 18 + TypeScript
+- Vite
+- React Router
+- Axios
+- Tailwind CSS
+- shadcn/ui
+- date-fns
 
-Cloudinary
+### 🎨 Design Template Origin
+This project uses a **custom-built UI template** created specifically for the TicketFlow system. Built from scratch (no external template used).
 
-SQLite for development
+---
 
-CORS Headers
-
-Frontend — React (Option A)
-
-React 18 + TypeScript
-
-Vite
-
-React Router
-
-Axios
-
-Tailwind CSS
-
-shadcn/ui
-
-date-fns
-
-🎨 Design Template Origin
-This project uses a custom-built UI template created specifically for the TicketFlow system.
-Built from scratch (no external template used)
-
-📁 Project Structure
+## 📁 Project Structure
 TicketFlow/
 ├── Backend/
-│   ├── backend/              
-│   ├── tickets/              
-│   │   ├── models.py
-│   │   ├── serializers.py
-│   │   ├── views.py
-│   │   ├── urls.py
-│   │   └── permissions.py
-│   ├── requirements.txt
-│   └── manage.py
-│
+│ ├── backend/
+│ ├── tickets/
+│ │ ├── models.py
+│ │ ├── serializers.py
+│ │ ├── views.py
+│ │ ├── urls.py
+│ │ └── permissions.py
+│ ├── requirements.txt
+│ └── manage.py
 ├── Frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── contexts/
-│   │   ├── hooks/
-│   │   ├── utils/
-│   │   └── types/
-│   ├── package.json
-│   └── vite.config.ts
-│
+│ ├── src/
+│ │ ├── components/
+│ │ ├── pages/
+│ │ ├── contexts/
+│ │ ├── hooks/
+│ │ ├── utils/
+│ │ └── types/
+│ ├── package.json
+│ └── vite.config.ts
 └── README.md
 
-🚀 Environment Setup Instructions
-🔧 Backend Setup
+yaml
+Copier le code
+
+---
+
+## 🚀 Environment Setup Instructions
+
+### 🔧 Backend Setup
+```bash
 git clone https://github.com/oumaimagaidi/TicketFlow
 cd TicketFlow/Backend
 
-Create virtual environment:
+# Create virtual environment
 python -m venv venv
-venv\Scripts\activate     # Windows
+
+# Activate virtual environment
+venv\Scripts\activate  # Windows
 source venv/bin/activate  # macOS/Linux
 
-Install dependencies:
+# Install dependencies
 pip install -r requirements.txt
-or Manually if you want
 
-Create .env:
+# Create .env
 cp .env.example .env
-CORS_ALLOWED_ORIGINS=//
-CLOUDINARY_CLOUD_NAME=//
-CLOUDINARY_API_KEY=//
-CLOUDINARY_API_SECRET=//
-DEBUG=True
+# Update .env values:
+# CORS_ALLOWED_ORIGINS=//
+# CLOUDINARY_CLOUD_NAME=//
+# CLOUDINARY_API_KEY=//
+# CLOUDINARY_API_SECRET=//
+# DEBUG=True
 
-Run migrations:
+# Run migrations
 python manage.py makemigrations
 python manage.py migrate
 
-Create admin user:
+# Create admin user
 python manage.py createsuperuser
 
-Run backend:
+# Run backend
 python manage.py runserver
-
 Backend runs at: http://localhost:8000
 
 💻 Frontend Setup
+bash
+Copier le code
 cd ../Frontend
 npm install
 npm run dev
-
 Frontend runs at: http://localhost:8081
 
 🔌 API Endpoints
 Authentication
-| Method | Endpoint            | Description   |
-| ------ | ------------------- | ------------- |
-| POST   | /api/auth/login/    | Login         |
-| POST   | /api/auth/register/ | Register      |
-| GET    | /api/auth/users/me/ | Get user info |
+Method	Endpoint	Description
+POST	/api/auth/login/	Login
+POST	/api/auth/register/	Register
+GET	/api/auth/users/me/	Get user info
 
 Tickets
-| Method | Endpoint                        | Description                |
-| ------ | ------------------------------- | -------------------------- |
-| GET    | /api/tickets/                   | List tickets (role-based)  |
-| POST   | /api/tickets/                   | Create ticket              |
-| GET    | /api/tickets/:id                | Ticket details             |
-| PATCH  | /api/tickets/:id/update_status/ | Update status (Admin only) |
+Method	Endpoint	Description
+GET	/api/tickets/	List tickets (role-based)
+POST	/api/tickets/	Create ticket
+GET	/api/tickets/:id	Ticket details
+PATCH	/api/tickets/:id/update_status/	Update status (Admin only)
 
 📦 File Upload (Cloudinary)
 Supports images, PDFs, documents
@@ -243,43 +239,39 @@ Automatic preview on frontend
 Secure upload handling
 
 🧪 How to Test the APIs
-
 Run backend
 
 Use Postman or Thunder Client
 
 Log in → copy token
-1️⃣ Login Example
-POST http://localhost:8000/api/auth/login/
-Body Example:
 
+1️⃣ Login Example
+bash
+Copier le code
+POST http://localhost:8000/api/auth/login/
+Body:
 {
-    "email": "nouveau@test.com",
-    "password": "Nouveau123!@#"
+  "email": "nouveau@test.com",
+  "password": "Nouveau123!@#"
 }
 2️⃣ Register Example
-
-Endpoint:
+bash
+Copier le code
 POST http://localhost:8000/api/auth/register/
-
-Body Example:
+Body:
 {
-    "email": "nouveau@test.com",
-    "username": "nouveauuser",
-    "password": "Nouveau123!@#",
-    "password2": "Nouveau123!@#"
+  "email": "nouveau@test.com",
+  "username": "nouveauuser",
+  "password": "Nouveau123!@#",
+  "password2": "Nouveau123!@#"
 }
-
 4️⃣ List Tickets
-
-Endpoint:
+pgsql
+Copier le code
 GET http://localhost:8000/api/tickets/
 Admin → sees all tickets
-
 User → sees only their tickets
-
 💬 How to Test Chat Integration
-
 Go to Tawk.to
 
 Create a Property
@@ -294,14 +286,17 @@ Chat widget appears automatically
 
 Test protected routes with Authorization: Bearer <token>
 
-
 🧩 Evaluation Criteria
-
 ✔ Clean API architecture
-✔ Correct role-based access
-✔ Search, filters, pagination
-✔ Functional ticket creation
-✔ Proper live chat integration
-✔ Clean UI & custom template
-✔ Clear documentation
 
+✔ Correct role-based access
+
+✔ Search, filters, pagination
+
+✔ Functional ticket creation
+
+✔ Proper live chat integration
+
+✔ Clean UI & custom template
+
+✔ Clear documentation
