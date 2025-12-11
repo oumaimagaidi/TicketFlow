@@ -113,7 +113,6 @@ Integrated with **Tawk.to** as required.
 
 Configuration (example):
 
-```ts
 s1.src = 'https://embed.tawk.to/YOUR_TAWKTO_ID/default';
 
 🏗️ Tech Stack
