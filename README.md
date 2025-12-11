@@ -168,7 +168,7 @@ TicketFlow/
 ## 🚀 Environment Setup Instructions
 
 ### 🔧 Backend Setup
-bash
+```bash
 git clone https://github.com/oumaimagaidi/TicketFlow
 cd TicketFlow/Backend
 
