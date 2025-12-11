@@ -168,7 +168,7 @@ TicketFlow/
 ## 🚀 Environment Setup Instructions
 
 ### 🔧 Backend Setup
-```bash
+bash
 git clone https://github.com/oumaimagaidi/TicketFlow
 cd TicketFlow/Backend
 
@@ -235,7 +235,7 @@ Automatic preview on frontend
 
 Secure upload handling
 
-## 🧪 How to Test the APIs
+ 🧪 How to Test the APIs
 Run backend
 
 Use Postman or Thunder Client
@@ -283,7 +283,7 @@ Chat widget appears automatically
 
 Test protected routes with Authorization: Bearer <token>
 
-## 🧩 Evaluation Criteria
+ 🧩 Evaluation Criteria
 ✔ Clean API architecture
 
 ✔ Correct role-based access
