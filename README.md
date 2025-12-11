@@ -244,7 +244,7 @@ Use Postman or Thunder Client
 Log in → copy token
 
 1️⃣ Login Example
-bash
+```bash
 
 POST http://localhost:8000/api/auth/login/
 Body:
@@ -268,7 +268,7 @@ Body:
 GET http://localhost:8000/api/tickets/
 Admin → sees all tickets
 User → sees only their tickets
-
+```
 ### 💬 How to Test Chat Integration
 Go to Tawk.to
 
