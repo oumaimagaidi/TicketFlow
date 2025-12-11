@@ -199,16 +199,17 @@ python manage.py createsuperuser
 # Run backend:
 python manage.py runserver
 Backend runs at: http://localhost:8000
-
-💻 Frontend Setup
-bash
+```
+### 💻 Frontend Setup
+```bash
 
 cd ../Frontend
 npm install
 npm run dev
+```
 Frontend runs at: http://localhost:8081
 
-🔌 API Endpoints
+### 🔌 API Endpoints
 Authentication
 | Method | Endpoint            | Description   |
 | ------ | ------------------- | ------------- |
@@ -226,7 +227,7 @@ Tickets
 | PATCH  | /api/tickets/:id/update_status/ | Update status (Admin only) |
 
 
-📦 File Upload (Cloudinary)
+### 📦 File Upload (Cloudinary)
 Supports images, PDFs, documents
 
 Max size: 10 MB
@@ -235,7 +236,7 @@ Automatic preview on frontend
 
 Secure upload handling
 
- 🧪 How to Test the APIs
+### 🧪 How to Test the APIs
 Run backend
 
 Use Postman or Thunder Client
@@ -268,7 +269,7 @@ GET http://localhost:8000/api/tickets/
 Admin → sees all tickets
 User → sees only their tickets
 
-💬 How to Test Chat Integration
+### 💬 How to Test Chat Integration
 Go to Tawk.to
 
 Create a Property
@@ -283,7 +284,7 @@ Chat widget appears automatically
 
 Test protected routes with Authorization: Bearer <token>
 
- 🧩 Evaluation Criteria
+ ### 🧩 Evaluation Criteria
 ✔ Clean API architecture
 
 ✔ Correct role-based access
