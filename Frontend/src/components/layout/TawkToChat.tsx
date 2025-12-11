@@ -10,7 +10,7 @@ export function TawkToChat() {
 
     console.log('💬 Initialisation du chat Tawk.to...');
 
-    // Votre code Tawk.to
+    // code Tawk.to
     const script = document.createElement('script');
     script.innerHTML = `
       var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
@@ -35,7 +35,7 @@ export function TawkToChat() {
         if (window.Tawk_API) {
           clearInterval(checkAPI);
           
-          // Configurer l'événement onLoad
+         
           if (window.Tawk_API.onLoad) {
             window.Tawk_API.onLoad = () => {
               console.log('🎯 Widget Tawk.to prêt');
