@@ -115,9 +115,9 @@ Configuration (example):
 
 s1.src = 'https://embed.tawk.to/YOUR_TAWKTO_ID/default';
 
-# 🏗️ TicketFlow
+# TicketFlow - Ticketing System
 
-## Tech Stack
+## 🏗️ Tech Stack
 
 ### Backend — Django
 - Django 4.2
@@ -136,10 +136,9 @@ s1.src = 'https://embed.tawk.to/YOUR_TAWKTO_ID/default';
 - shadcn/ui
 - date-fns
 
-### 🎨 Design Template Origin
-This project uses a **custom-built UI template** created specifically for the TicketFlow system. Built from scratch (no external template used).
-
----
+## 🎨 Design Template Origin
+This project uses a custom-built UI template created specifically for the TicketFlow system.
+**Built from scratch** (no external template used)
 
 ## 📁 Project Structure
 TicketFlow/
@@ -165,10 +164,6 @@ TicketFlow/
 │ └── vite.config.ts
 └── README.md
 
-yaml
-Copier le code
-
----
 
 ## 🚀 Environment Setup Instructions
 
@@ -177,39 +172,37 @@ Copier le code
 git clone https://github.com/oumaimagaidi/TicketFlow
 cd TicketFlow/Backend
 
-# Create virtual environment
+# Create virtual environment:
 python -m venv venv
+venv\Scripts\activate # Windows
+source venv/bin/activate # macOS/Linux
 
-# Activate virtual environment
-venv\Scripts\activate  # Windows
-source venv/bin/activate  # macOS/Linux
-
-# Install dependencies
+# Install dependencies:
 pip install -r requirements.txt
+# or Manually if you want
 
-# Create .env
+# Create .env:
 cp .env.example .env
-# Update .env values:
 # CORS_ALLOWED_ORIGINS=//
 # CLOUDINARY_CLOUD_NAME=//
 # CLOUDINARY_API_KEY=//
 # CLOUDINARY_API_SECRET=//
 # DEBUG=True
 
-# Run migrations
+# Run migrations:
 python manage.py makemigrations
 python manage.py migrate
 
-# Create admin user
+# Create admin user:
 python manage.py createsuperuser
 
-# Run backend
+# Run backend:
 python manage.py runserver
 Backend runs at: http://localhost:8000
 
 💻 Frontend Setup
 bash
-Copier le code
+
 cd ../Frontend
 npm install
 npm run dev
@@ -217,17 +210,21 @@ Frontend runs at: http://localhost:8081
 
 🔌 API Endpoints
 Authentication
-Method	Endpoint	Description
-POST	/api/auth/login/	Login
-POST	/api/auth/register/	Register
-GET	/api/auth/users/me/	Get user info
+| Method | Endpoint            | Description   |
+| ------ | ------------------- | ------------- |
+| POST   | /api/auth/login/    | Login         |
+| POST   | /api/auth/register/ | Register      |
+| GET    | /api/auth/users/me/ | Get user info |
+
 
 Tickets
-Method	Endpoint	Description
-GET	/api/tickets/	List tickets (role-based)
-POST	/api/tickets/	Create ticket
-GET	/api/tickets/:id	Ticket details
-PATCH	/api/tickets/:id/update_status/	Update status (Admin only)
+| Method | Endpoint                        | Description                |
+| ------ | ------------------------------- | -------------------------- |
+| GET    | /api/tickets/                   | List tickets (role-based)  |
+| POST   | /api/tickets/                   | Create ticket              |
+| GET    | /api/tickets/:id                | Ticket details             |
+| PATCH  | /api/tickets/:id/update_status/ | Update status (Admin only) |
+
 
 📦 File Upload (Cloudinary)
 Supports images, PDFs, documents
@@ -247,7 +244,7 @@ Log in → copy token
 
 1️⃣ Login Example
 bash
-Copier le code
+
 POST http://localhost:8000/api/auth/login/
 Body:
 {
@@ -256,7 +253,7 @@ Body:
 }
 2️⃣ Register Example
 bash
-Copier le code
+
 POST http://localhost:8000/api/auth/register/
 Body:
 {
@@ -266,11 +263,11 @@ Body:
   "password2": "Nouveau123!@#"
 }
 4️⃣ List Tickets
-pgsql
-Copier le code
+
 GET http://localhost:8000/api/tickets/
 Admin → sees all tickets
 User → sees only their tickets
+
 💬 How to Test Chat Integration
 Go to Tawk.to
 
