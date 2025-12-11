@@ -17,4 +17,5 @@ urlpatterns = [
     path('users/logout/', views.UserViewSet.as_view({'post': 'logout'}), name='user-logout'),
     
     path('tickets/<int:ticket_id>/download/', download_ticket_attachment, name='download-attachment'),
+    
 ]

@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
 from cloudinary.models import CloudinaryField
+import cloudinary
 
 class User(AbstractUser):
     ROLE_CHOICES = (
@@ -81,8 +82,9 @@ class Ticket(models.Model):
     attachment = CloudinaryField(
         resource_type='auto',
         folder='ticket_attachments/',
+        type='upload',
         null=True,
-        blank=True,
+        blank=True, 
         verbose_name="Attachment File"
     )
     
@@ -162,6 +164,55 @@ class Ticket(models.Model):
     def __str__(self):
         return f"#{self.id}: {self.title}"
     
+    # ============ MÉTHODES POUR ATTACHMENTS ============
+    def get_attachment_download_url(self):
+        """Retourne l'URL de téléchargement Cloudinary avec flag d'attachement"""
+        if not self.attachment:
+            return None
+        
+        try:
+            import cloudinary
+            from cloudinary.utils import cloudinary_url
+            
+            public_id = self.attachment.public_id
+            format = self.attachment.format
+            
+            if format == "pdf":
+                resource_type = "raw"
+            else:
+                resource_type = self.attachment.resource_type or "image"
+            
+            url, options = cloudinary_url(
+                public_id,
+                format=format,
+                resource_type=resource_type,
+                flags=['attachment'],  
+                type='upload'
+            )
+            
+            return url
+            
+        except Exception as e:
+            print(f"Error generating download URL: {e}")
+            try:
+                url = str(self.attachment.url)
+                if 'cloudinary.com' in url and 'fl_attachment' not in url:
+                    if '/upload/' in url:
+                        url = url.replace('/upload/', '/upload/fl_attachment/')
+                    elif '/image/' in url:
+                        url = url.replace('/image/', '/image/upload/fl_attachment/')
+                    elif '/raw/' in url:
+                        url = url.replace('/raw/', '/raw/upload/fl_attachment/')
+                return url
+            except:
+                return None
+    
+    def get_attachment_view_url(self):
+        """URL pour visualiser le fichier (sans téléchargement forcé)"""
+        if not self.attachment:
+            return None
+        return self.attachment.url
+    
     # ============ MÉTHODES POUR ADMIN ============
     def assign_to_user(self, user):
         """Assigner le ticket à un utilisateur (admin seulement)"""
@@ -201,14 +252,12 @@ class Ticket(models.Model):
         """Vérifie si l'utilisateur peut éditer ce ticket"""
         if user.role == 'admin':
             return True
-        # L'utilisateur ne peut éditer que ses propres tickets non assignés
         return self.created_by == user and self.status == 'New'
     
     def can_user_delete(self, user):
         """Vérifie si l'utilisateur peut supprimer ce ticket"""
         if user.role == 'admin':
             return True
-        # L'utilisateur ne peut supprimer que ses propres tickets non assignés
         return self.created_by == user and self.status == 'New'
     
     # ============ MÉTHODES UTILITAIRES ============
@@ -225,6 +274,8 @@ class Ticket(models.Model):
             'name': self.attachment_name,
             'size': self.attachment_size,
             'url': self.get_attachment_url(),
+            'download_url': self.get_attachment_download_url(),
+            'view_url': self.get_attachment_view_url(),
             'type': self.get_file_type()
         }
     
@@ -313,7 +364,6 @@ class Ticket(models.Model):
             data['due_date'] = self.due_date.isoformat()
         
         return data
-
 
 # ============ MODÈLE POUR HISTORIQUE DES STATUTS ============
 class TicketStatusHistory(models.Model):
